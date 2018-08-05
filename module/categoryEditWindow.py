@@ -6,4 +6,4 @@ class CategoryEditWindow(QtWidgets.QMainWindow, Ui_categoryEdit):
         super(CategoryEditWindow, self).__init__(parent)
         self.setupUi(self)
         self.cancel.clicked.connect(self.close)
-        self.cancel.clicked.connect(parent.show)
+        self.cancel.clicked.connect(parent.show)        

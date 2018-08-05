@@ -73,7 +73,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Question #1</string>
+    <string>Question $200:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="answer1">
@@ -99,7 +99,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Answer #1</string>
+    <string>Answer $200:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="question2">
@@ -135,7 +135,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Answer #2</string>
+    <string>Answer $400:</string>
    </property>
   </widget>
   <widget class="QLabel" name="q2_label">
@@ -148,7 +148,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Question #2</string>
+    <string>Question $400:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="question3">
@@ -184,7 +184,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Answer #3</string>
+    <string>Answer $600:</string>
    </property>
   </widget>
   <widget class="QLabel" name="q3_label">
@@ -197,7 +197,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Question #3</string>
+    <string>Question $600:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="question4">
@@ -233,7 +233,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Answer #4</string>
+    <string>Answer $800:</string>
    </property>
   </widget>
   <widget class="QLabel" name="q4_label">
@@ -246,7 +246,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Question #4</string>
+    <string>Question $800</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="question5">
@@ -282,7 +282,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Answer #5</string>
+    <string>Answer $1,000:</string>
    </property>
   </widget>
   <widget class="QLabel" name="q5_label">
@@ -295,7 +295,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Question #5</string>
+    <string>Question $1,000:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="save">
