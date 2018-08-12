@@ -2,6 +2,7 @@ from PyQt5 import QtGui, QtWidgets
 from ui.categoryAdd import Ui_categoryAdd
 import csv
 import time
+import os
 
 class CategoryAddWindow(QtWidgets.QMainWindow, Ui_categoryAdd):
     def __init__(self, parent):
@@ -13,18 +14,18 @@ class CategoryAddWindow(QtWidgets.QMainWindow, Ui_categoryAdd):
         self.save.clicked.connect(self.show)
 
     def saveCategory(self):
-        filename = 'db/' + 'category' + time.strftime("%Y%m%d%H%M%S") + '.csv'
+        filename = os.path.join('db', time.strftime("%Y%m%d%H%M%S") + '.csv')
         try:
+            self.message = QtWidgets.QMessageBox()
             with open(filename,'w') as csvfile:
                 rowwriter = csv.writer(csvfile, delimiter='|')
                 rowwriter.writerow([self.category.text(),self.question1.text(),self.answer1.text(),
                 self.question2.text(),self.answer2.text(),self.question3.text(),
                 self.answer3.text(),self.question4.text(),self.answer4.text(),
                 self.question5.text(),self.answer5.text()])
-            self.message = QtWidgets.QMessageBox()
         except:
             self.message.setWindowTitle("Category Status")
-            self.message.setText("The category has not saved. Please check the content.")
+            self.message.setText("The category has not been saved. Please check the content.")
             self.message.show()
         else:    
             fields = [self.category,self.question1,self.answer1,self.question2,self.answer2,
