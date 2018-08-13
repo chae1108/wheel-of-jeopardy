@@ -1,39 +1,43 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'ui/game.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.2
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QFont, QColor
 
 class Ui_game(object):
+
+    # I've changed the GUIs around a bit.  They are no londer resizable.  I've added a WOJ logo and the game board.
+    # Still need a wheel.  This will be tricky to add all the names.  The grid layout needs to be adjusted to the
+    # correct position and font needs to change.  The other text data can move too.
     def setupUi(self, game):
         game.setObjectName("game")
-        game.resize(953, 750)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(6)
-        sizePolicy.setVerticalStretch(6)
-        sizePolicy.setHeightForWidth(game.sizePolicy().hasHeightForWidth())
-        game.setSizePolicy(sizePolicy)
-        self.title = QtWidgets.QTextEdit(game)
-        self.title.setGeometry(QtCore.QRect(290, 20, 401, 51))
-        self.title.setObjectName("title")
+        game.setFixedSize(1150, 750)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        #sizePolicy.setHorizontalStretch(6)
+        #sizePolicy.setVerticalStretch(6)
+        #sizePolicy.setHeightForWidth(game.sizePolicy().hasHeightForWidth())
+        #game.setSizePolicy(sizePolicy)
+        self.logo = QtWidgets.QLabel(game)
+        self.logo.setGeometry(QtCore.QRect(150, 15, 1000, 100))
+        self.logo.setPixmap(QtGui.QPixmap('WOJlogo.png'))
+        self.logo.setObjectName("logo")
+
+        self.board = QtWidgets.QLabel(game)
+        self.board.setGeometry(QtCore.QRect(475, 75, 650, 650))
+        self.board.setPixmap(QtGui.QPixmap('jeopardy.png'))
+        self.board.setObjectName("board")
+
         self.round = QtWidgets.QLabel(game)
-        self.round.setGeometry(QtCore.QRect(740, 30, 151, 51))
+        self.round.setGeometry(QtCore.QRect(700, 120, 100, 30))
         self.round.setObjectName("round")
         self.spins = QtWidgets.QLabel(game)
-        self.spins.setGeometry(QtCore.QRect(740, 70, 151, 51))
+        self.spins.setGeometry(QtCore.QRect(800, 120, 100, 30))
         self.spins.setObjectName("spins")
         self.contestant1 = QtWidgets.QLabel(game)
-        self.contestant1.setGeometry(QtCore.QRect(100, 580, 151, 51))
+        self.contestant1.setGeometry(QtCore.QRect(100, 700, 200, 30))
         self.contestant1.setObjectName("contestant1")
         self.contestant2 = QtWidgets.QLabel(game)
-        self.contestant2.setGeometry(QtCore.QRect(340, 580, 151, 51))
+        self.contestant2.setGeometry(QtCore.QRect(340, 700, 200, 30))
         self.contestant2.setObjectName("contestant2")
         self.contestant3 = QtWidgets.QLabel(game)
-        self.contestant3.setGeometry(QtCore.QRect(650, 580, 151, 51))
+        self.contestant3.setGeometry(QtCore.QRect(650, 700, 200, 30))
         self.contestant3.setObjectName("contestant3")
         self.spinner = QtWidgets.QPushButton(game)
         self.spinner.setGeometry(QtCore.QRect(60, 340, 112, 34))
@@ -41,8 +45,9 @@ class Ui_game(object):
         self.sector = QtWidgets.QLabel(game)
         self.sector.setGeometry(QtCore.QRect(70, 250, 121, 51))
         self.sector.setObjectName("sector")
+
         self.gridLayoutWidget = QtWidgets.QWidget(game)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(270, 140, 651, 431))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(500, 160, 600, 500))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -191,8 +196,9 @@ class Ui_game(object):
         self.c6q5.setAlignment(QtCore.Qt.AlignCenter)
         self.c6q5.setObjectName("c6q5")
         self.gridLayout.addWidget(self.c6q5, 5, 5, 1, 1)
+
         self.back = QtWidgets.QPushButton(game)
-        self.back.setGeometry(QtCore.QRect(730, 670, 181, 61))
+        self.back.setGeometry(QtCore.QRect(700, 650, 200, 70))
         self.back.setObjectName("back")
 
         self.retranslateUi(game)
@@ -200,12 +206,9 @@ class Ui_game(object):
 
     def retranslateUi(self, game):
         _translate = QtCore.QCoreApplication.translate
-        game.setWindowTitle(_translate("game", "Form"))
-        self.title.setHtml(_translate("game", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; font-weight:600;\">Wheel of Jeopardy</span></p></body></html>"))
+        game.setWindowTitle(_translate("game", "Wheel of Jeopardy"))
+        font = QFont()
+        color = QColor(239, 167, 53)
         self.round.setText(_translate("game", "Round:"))
         self.spins.setText(_translate("game", "Spins:"))
         self.contestant1.setText(_translate("game", "Contestant 1:"))
@@ -250,4 +253,3 @@ class Ui_game(object):
         self.c4q5.setText(_translate("game", "$1,000"))
         self.c6q5.setText(_translate("game", "$1,000"))
         self.back.setText(_translate("game", "Back to Main Menu"))
-
