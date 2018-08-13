@@ -1,20 +1,15 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'ui/categoryAdd.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.2
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_categoryAdd(object):
+
+    # I've changed the GUIs around a bit.  They are no londer resizable.  I've added a WOJ logo
     def setupUi(self, categoryAdd):
         categoryAdd.setObjectName("categoryAdd")
-        categoryAdd.resize(1000, 700)
-        self.title = QtWidgets.QTextEdit(categoryAdd)
-        self.title.setGeometry(QtCore.QRect(300, 10, 401, 51))
-        self.title.setObjectName("title")
+        categoryAdd.setFixedSize(1000, 700)
+        self.logo = QtWidgets.QLabel(categoryAdd)
+        self.logo.setGeometry(QtCore.QRect(75, 15, 1000, 100))
+        self.logo.setPixmap(QtGui.QPixmap('WOJlogo.png'))
+        self.logo.setObjectName("logo")
         self.category = QtWidgets.QLineEdit(categoryAdd)
         self.category.setGeometry(QtCore.QRect(280, 80, 621, 41))
         self.category.setObjectName("category")
@@ -99,22 +94,16 @@ class Ui_categoryAdd(object):
     def retranslateUi(self, categoryAdd):
         _translate = QtCore.QCoreApplication.translate
         categoryAdd.setWindowTitle(_translate("categoryAdd", "Form"))
-        self.title.setHtml(_translate("categoryAdd", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; font-weight:600;\">Wheel of Jeopardy</span></p></body></html>"))
         self.category_label.setText(_translate("categoryAdd", "Category Name"))
-        self.q1_label.setText(_translate("categoryAdd", "Question $200:"))
-        self.a1_label.setText(_translate("categoryAdd", "Answer $200:"))
-        self.a2_label.setText(_translate("categoryAdd", "Answer $400:"))
-        self.q2_label.setText(_translate("categoryAdd", "Question $400:"))
-        self.a3_label.setText(_translate("categoryAdd", "Answer $600:"))
-        self.q3_label.setText(_translate("categoryAdd", "Question $600:"))
-        self.a4_label.setText(_translate("categoryAdd", "Answer $800:"))
-        self.q4_label.setText(_translate("categoryAdd", "Question $800"))
-        self.a5_label.setText(_translate("categoryAdd", "Answer $1,000:"))
-        self.q5_label.setText(_translate("categoryAdd", "Question $1,000:"))
+        self.q1_label.setText(_translate("categoryAdd", "Question #1"))
+        self.a1_label.setText(_translate("categoryAdd", "Answer #1"))
+        self.a2_label.setText(_translate("categoryAdd", "Answer #2"))
+        self.q2_label.setText(_translate("categoryAdd", "Question #2"))
+        self.a3_label.setText(_translate("categoryAdd", "Answer #3"))
+        self.q3_label.setText(_translate("categoryAdd", "Question #3"))
+        self.a4_label.setText(_translate("categoryAdd", "Answer #4"))
+        self.q4_label.setText(_translate("categoryAdd", "Question #4"))
+        self.a5_label.setText(_translate("categoryAdd", "Answer #5"))
+        self.q5_label.setText(_translate("categoryAdd", "Question #5"))
         self.save.setText(_translate("categoryAdd", "Save"))
         self.cancel.setText(_translate("categoryAdd", "Cancel"))
-
