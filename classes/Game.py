@@ -1,13 +1,15 @@
-from Wheel import Wheel
-from Board import Board
-from Player import Player
+from classes.Wheel import Wheel
+from classes.Board import Board
+from classes.Player import Player
 
 class Game:
 
+    # Added game over
     def __init__(self, categories):
         self.__turn = 0
         self.__round = 1
         self.__spins = 50
+        self.__gameOver = False
         self.__players = self.__createPlayers()
         self.__wheel = self.__createWheel(categories)
         self.__board = self.__createBoard(categories, self.__round)
@@ -48,6 +50,9 @@ class Game:
 
     def getSpins(self):
         return self.__spins
+
+    def isGameOver(self):
+        return self.__gameOver
 
     def getPlayer(self, id):
         return self.__players[id]
