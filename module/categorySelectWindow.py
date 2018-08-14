@@ -1,11 +1,11 @@
 from PyQt5 import QtGui, QtWidgets
 from ui.categorySelect import Ui_categorySelect
 from module.gameWindow import GameWindow
-from PyQt5.QtWidgets import QAbstractItemView
+from PyQt5.QtWidgets import QAbstractItemView,QMessageBox
 
 class CategorySelectWindow(QtWidgets.QMainWindow, Ui_categorySelect):
 
-    # Changed the UI.  Need to ensure there are 12 categories selected in the right field before moving onto the game
+    # Changed the UI.
     def __init__(self, parent):
         super(CategorySelectWindow, self).__init__(parent)
         self.setupUi(self)
@@ -17,18 +17,11 @@ class CategorySelectWindow(QtWidgets.QMainWindow, Ui_categorySelect):
 
     # Moves to the game window
     def goToGame(self):
-        self.close()
-        self.goToGame = GameWindow(parent=self)
-        self.goToGame.show()
-
-    # INCOMPLETE!!!! Need to figure out how to select an item and get it's index/value
-    # moves the selected category over to the right field
-    def moveToRight(self):
-        self.availableModel.removeRow(0)
-        item = QtGui.QStandardItem("cat8")
-        self.chosenModel.appendRow(item)
-        print("Move right")
-
-    # INCOMPLETE!!!! This is the reverse of moveToRight
-    def moveToLeft(self):
-        self.chosenModel.removeRow(0)
+        if self.chosenList.count() == 12:        
+            self.close()
+            self.goToGame = GameWindow(parent=self)
+            self.goToGame.show()
+        else:
+            option = QMessageBox.question(self, "Warning.", "You must select 12 categories to play.", QMessageBox.Ok)
+            if(option == QMessageBox.Ok):
+                pass

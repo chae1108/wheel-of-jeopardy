@@ -1,6 +1,6 @@
-from classes.Wheel import Wheel
-from classes.Board import Board
-from classes.Player import Player
+from Wheel import Wheel
+from Board import Board
+from Player import Player
 
 class Game:
 

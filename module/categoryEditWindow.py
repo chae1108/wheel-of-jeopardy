@@ -14,5 +14,4 @@ class CategoryEditWindow(QtWidgets.QMainWindow, Ui_categoryEdit):
                     self.list.addItem(row[0])
         self.cancel.clicked.connect(self.close)
         self.cancel.clicked.connect(parent.show)        
-        self.select.clicked.connect(self.editCategory)
         self.select.clicked.connect(self.show)

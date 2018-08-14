@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ui.game import Ui_game
 from classes.Game import Game
+import module.gameChoiceWindow
+
 from module.gameChoiceWindow import GameChoiceWindow
 from ui.gameChoice import Ui_gameChoice
 

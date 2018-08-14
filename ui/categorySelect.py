@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QAbstractItemView
 import os
+import csv
 
 class Ui_categorySelect(object):
 
@@ -14,24 +15,20 @@ class Ui_categorySelect(object):
         self.logo.setPixmap(QtGui.QPixmap('WOJlogo.png'))
         self.logo.setObjectName("logo")
 
-        self.availableList = QtWidgets.QListView(categorySelect)
+        self.availableList = QtWidgets.QListWidget(categorySelect)
         self.availableList.setGeometry(QtCore.QRect(150, 130, 300, 400))
         self.availableList.setObjectName("availableList")
         self.availableList.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         categories = self.getCategoryNames()
 
-        self.availableModel = QtGui.QStandardItemModel()
-        self.availableList.setModel(self.availableModel)
         for category in categories:
-            item = QtGui.QStandardItem(category)
-            self.availableModel.appendRow(item)
+            item = QtWidgets.QListWidgetItem(category)
+            self.availableList.addItem(item.text())
 
-        self.chosenList = QtWidgets.QListView(categorySelect)
+        self.chosenList = QtWidgets.QListWidget(categorySelect)
         self.chosenList.setGeometry(QtCore.QRect(550, 130, 300, 400))
         self.chosenList.setObjectName("chosenList")
-        self.chosenModel = QtGui.QStandardItemModel()
-        self.chosenList.setModel(self.chosenModel)
 
         self.startGame = QtWidgets.QPushButton(categorySelect)
         self.startGame.setGeometry(QtCore.QRect(150, 530, 300, 70))
@@ -64,8 +61,20 @@ class Ui_categorySelect(object):
         categoryNames = []
         fileNames = os.listdir("./db")
         for file in fileNames:
-            if file[-4:] == ".csv":
-                file = file[:-4]
-                categoryNames.append(file)
+            with open(os.path.join(os.getcwd(),'db',file)) as csvfile:
+                ader = csv.reader(csvfile, delimiter='|')
+                for row in ader:
+                    categoryNames.append(row[0])
 
         return categoryNames
+
+    # INCOMPLETE!!!! Need to figure out how to select an item and get it's index/value
+    # moves the selected category over to the right field
+    def moveToRight(self):
+        self.chosenList.addItem(self.availableList.currentItem().text())
+        self.availableList.takeItem(self.availableList.currentRow())
+
+    # INCOMPLETE!!!! This is the reverse of moveToRight
+    def moveToLeft(self):
+        self.availableList.addItem(self.chosenList.currentItem().text())
+        self.chosenList.takeItem(self.chosenList.currentRow())
