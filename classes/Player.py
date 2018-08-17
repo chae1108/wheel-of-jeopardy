@@ -18,11 +18,15 @@ class Player:
     def getTotalScore(self):
         return self.__totalScore
 
-    # Updates the player score
-    def updateScore(self, update):
-        self.__roundScore = update
+    # Updates the player's round score
+    def updateRoundScore(self, update):
+        self.__roundScore += update
 
-    # Doubles the player score
+    # Updates the player's total score
+    def updateTotalScore(self, update):
+        self.__totalScore += update
+
+    # Doubles the player's round score
     def doubleScore(self):
         self.__roundScore *= 2
 
