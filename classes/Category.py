@@ -1,4 +1,4 @@
-from Square import Square
+from classes.Square import Square
 
 class Category:
 
