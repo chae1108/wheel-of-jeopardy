@@ -17,6 +17,14 @@ class Board:
 
         return categoryObjects
 
+    # Returns the categories
+    def getCategories(self):
+        return self.__categories
+
+    # Returns a specific category based upon an ID
+    def getCategory(self, id):
+        return self.__categories[id]
+
     # Returns if a category, based upon an ID, is available to play
     def isCategoryAvailable(self, id):
         category = self.__categories[id]
