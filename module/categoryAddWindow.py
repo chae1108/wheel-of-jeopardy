@@ -11,7 +11,8 @@ class CategoryAddWindow(QtWidgets.QMainWindow, Ui_categoryAdd):
         self.cancel.clicked.connect(self.close)
         self.cancel.clicked.connect(parent.show)
         self.save.clicked.connect(self.saveCategory)
-        self.save.clicked.connect(self.show)
+        self.save.clicked.connect(self.close)
+        self.save.clicked.connect(parent.show)
 
     # Filename is the category name. Writes m
     def saveCategory(self):
