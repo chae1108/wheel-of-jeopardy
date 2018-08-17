@@ -1,4 +1,4 @@
-from Category import Category
+from classes.Category import Category
 
 class Board:
 
