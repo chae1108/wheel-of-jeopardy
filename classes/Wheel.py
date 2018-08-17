@@ -1,4 +1,4 @@
-from Sector import Sector
+from classes.Sector import Sector
 from random import Random
 
 class Wheel:
