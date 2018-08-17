@@ -1,29 +1,53 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'ui/gameChoice.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.2
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QAbstractItemView
+from classes.Game import Game
 
 class Ui_gameChoice(object):
-    def setupUi(self, gameChoice):
+    def setupUi(self, gameChoice, game):
+        self.game = game
         gameChoice.setObjectName("gameChoice")
-        gameChoice.resize(400, 300)
+        gameChoice.setFixedSize(400, 300)
         self.select = QtWidgets.QPushButton(gameChoice)
         self.select.setGeometry(QtCore.QRect(130, 210, 141, 61))
         self.select.setObjectName("select")
-        self.list = QtWidgets.QListView(gameChoice)
+        self.list = QtWidgets.QListWidget(gameChoice)
         self.list.setGeometry(QtCore.QRect(90, 10, 256, 192))
         self.list.setObjectName("list")
+        self.list.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+        categories = self.getCategoryNames()
+
+        for category in categories:
+            item = QtWidgets.QListWidgetItem(category)
+            self.list.addItem(item.text())
 
         self.retranslateUi(gameChoice)
         QtCore.QMetaObject.connectSlotsByName(gameChoice)
 
+        self.categoryChoice = -1
+
     def retranslateUi(self, gameChoice):
         _translate = QtCore.QCoreApplication.translate
-        gameChoice.setWindowTitle(_translate("gameChoice", "Form"))
+        gameChoice.setWindowTitle(_translate("gameChoice", "Choose a Category"))
         self.select.setText(_translate("gameChoice", "Select"))
 
+    def getCategoryNames(self):
+        categoryNames = []
+
+        for category in self.game.getBoard().getCategories():
+            available = category.isAvailable()
+            if available:
+                name = category.getName()
+                categoryNames.append(name)
+
+        return categoryNames
+
+    def selectCategory(self):
+        try:
+            spin = self.list.currentRow()
+        except:
+            message = QMessageBox.question(self, "Error",
+                                           "Please select a category.",
+                                           QMessageBox.Ok)
+            if (message == QMessageBox.Ok):
+                pass
