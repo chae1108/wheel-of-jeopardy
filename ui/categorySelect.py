@@ -1,12 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QAbstractItemView
+from PyQt5.QtWidgets import QMessageBox
 import os
 import csv
 
 class Ui_categorySelect(object):
 
-    # I've changed the GUIs around a bit.  They are no londer resizable.  I've added a WOJ logo.  The StandardItemModel
-    # adds the categories to select from.
     def setupUi(self, categorySelect):
         categorySelect.setObjectName("categorySelect")
         categorySelect.setFixedSize(1000, 600)
@@ -56,25 +55,40 @@ class Ui_categorySelect(object):
         self.moveToLeftColumn.setText(_translate("categorySelect", "<<"))
         self.moveToRightColumn.setText(_translate("categorySelect", ">>"))
 
-    # Removed the .csv extension from the filename
     def getCategoryNames(self):
         categoryNames = []
         fileNames = os.listdir("./db")
         for file in fileNames:
-            with open(os.path.join(os.getcwd(),'db',file)) as csvfile:
-                ader = csv.reader(csvfile, delimiter='|')
-                for row in ader:
-                    categoryNames.append(row[0])
+            if file[-4:] == ".csv":
+                file = file[:-4]
+                categoryNames.append(file)
 
         return categoryNames
 
-    # INCOMPLETE!!!! Need to figure out how to select an item and get it's index/value
-    # moves the selected category over to the right field
     def moveToRight(self):
-        self.chosenList.addItem(self.availableList.currentItem().text())
-        self.availableList.takeItem(self.availableList.currentRow())
+        try:
+            item = self.availableList.currentItem().text()
+            row = self.availableList.currentRow()
+        except:
+            message = QMessageBox.question(self, "Error",
+                                           "Please select a category.",
+                                           QMessageBox.Ok)
+            if (message == QMessageBox.Ok):
+                pass
+        else:
+            self.chosenList.addItem(item)
+            self.availableList.takeItem(row)
 
-    # INCOMPLETE!!!! This is the reverse of moveToRight
     def moveToLeft(self):
-        self.availableList.addItem(self.chosenList.currentItem().text())
-        self.chosenList.takeItem(self.chosenList.currentRow())
+        try:
+            item = self.chosenList.currentItem().text()
+            row = self.chosenList.currentRow()
+        except:
+            message = QMessageBox.question(self, "Error",
+                                           "Please select a category.",
+                                           QMessageBox.Ok)
+            if (message == QMessageBox.Ok):
+                pass
+        else:
+            self.availableList.addItem(item)
+            self.chosenList.takeItem(row)
