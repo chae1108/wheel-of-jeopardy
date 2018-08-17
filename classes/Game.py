@@ -38,7 +38,12 @@ class Game:
         return wheel
 
     def __createBoard(self, categories, round):
-        board = Board(categories, round)
+        if round == 1:
+            round1Categories = categories[0:6]
+            board = Board(round1Categories, round)
+        else:
+            round2Categories = categories[6:12]
+            board = Board(round2Categories, round)
 
         return board
 
@@ -78,14 +83,8 @@ class Game:
             self.__freeTurn(player)
         elif spin == 5:
             self.__bankrupt(player)
-        elif spin == 7 or spin == 9:
-            spin = self.__categoryChoice(player)
-            #spin *= 2
-            #self.__playCategory(spin, player)
         elif spin == 11:
             self.__doubleScore(player)
-        else:
-            self.__playCategory(spin, player)
 
         self.useSpin()
 
@@ -107,23 +106,25 @@ class Game:
         self.nextTurn()
         print("Bankrupt")
 
-    def __categoryChoice(self, player):
-        print("Choice")
-        ###################################### NEEDS TO GET CATEGORY ######################################
-
     def __doubleScore(self, player):
         player.doubleScore()
         print("Score doubled")
 
-    def __playCategory(self, spin, player):
+    def playCategory(self, spin):
         boardID = int(spin / 2)
         categoryIsAvailable = self.__board.isCategoryAvailable(boardID)
         if categoryIsAvailable:
+            catName = self.getBoard().getCategory(boardID).getName()
             square = self.__board.playCategory(boardID)
             question = square.getQuestion()
-            print(question)
+            answer = square.getAnswer()
+            value = square.getValue()
+            data = [catName, value, question, answer]
+            return data
         else:
-            print("Category is unavaible")
+            data = ["", 0, "", ""]
+            return data
+        self.useSpin()
 
     def playerAnswersCorrect(self):
         return
@@ -138,23 +139,23 @@ class Game:
         self.__turn = (self.__turn + 1) % 3
 
     def nextRound(self, categories):
-        self._turn = self.__getLosingPlayer()
+        self._turn = self.__getLastPlacePlayer()
         self.__round += 1
         self.__spins = 50
         self.__wheel = self.__createWheel(categories)
         self.__board = self.__board(categories, self.__round)
 
-    def __getLosingPlayer(self):
+    def __getLastPlacePlayer(self):
         lowestScore = self.__players[0].getTotalScore()
-        losingPlayer = 0
+        lastPlace = 0
         for player in self.__players:
             score = player.getTotalScore()
 
             if score < lowestScore:
                 lowestScore = score
-                losingPlayer = player.getID()
+                lastPlace = player.getID()
 
-        return losingPlayer
+        return lastPlace
 
     def printPlayers(self):
         for player in self.__players:
