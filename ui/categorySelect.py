@@ -29,6 +29,11 @@ class Ui_categorySelect(object):
         self.chosenList.setGeometry(QtCore.QRect(550, 130, 300, 400))
         self.chosenList.setObjectName("chosenList")
 
+        # for testing
+        for category in categories:
+            item = QtWidgets.QListWidgetItem(category)
+            self.chosenList.addItem(item.text())            
+
         self.startGame = QtWidgets.QPushButton(categorySelect)
         self.startGame.setGeometry(QtCore.QRect(150, 530, 300, 70))
         self.startGame.setObjectName("startGame")

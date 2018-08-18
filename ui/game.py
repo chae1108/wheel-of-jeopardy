@@ -264,9 +264,12 @@ class Ui_game(object):
     # Updates the GUI after the spin button is clicked.  Only works sometimes
     def updateUI(self):
         _translate = QtCore.QCoreApplication.translate
+        categoryname = ["Category 1","Lose Turn","Category 2","Free Turn","Category 3",
+        "Bankrupt","Category 4","Game Choice 1","Category 5","Game Choice 2","Category 6",
+        "Double Score"]
         self.round.setText(_translate("game", "Round: " + str(self.game.getRound())))
         self.spins.setText(_translate("game", "Spins: " + str(self.game.getSpins())))
-        self.sector.setText(_translate("game", "Spin: " + str(self.spin)))
+        self.sector.setText(_translate("game", "Spin: " + (categoryname[int(self.spin)] if self.spin != "" else "")))
         self.roundScore1.setText(_translate("game", "Round: $" + str(self.game.getPlayer(0).getRoundScore())))
         self.roundScore2.setText(_translate("game", "Round: $" + str(self.game.getPlayer(1).getRoundScore())))
         self.roundScore3.setText(_translate("game", "Round: $" + str(self.game.getPlayer(2).getRoundScore())))
@@ -282,7 +285,7 @@ class Ui_game(object):
     # INCOMPLETE -- Should change the score displayed based on the round.  Should also display a BLANK square once the
     # question is answered
     def updateCategories(self, _translate):
-        self.c1q1.setText(_translate("game", "$200"))
+        self.c1q1.setText(_translate("game", str(self.game.getSpins())))
         self.c1q2.setText(_translate("game", "$400"))
         self.c1q3.setText(_translate("game", "$600"))
         self.c1q4.setText(_translate("game", "$800"))

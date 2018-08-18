@@ -19,7 +19,7 @@ class CategorySelectWindow(QtWidgets.QMainWindow, Ui_categorySelect):
     def goToGame(self):
         if self.chosenList.count() == 12:        
             self.close()
-            self.goToGame = GameWindow(parent=self)
+            self.goToGame = GameWindow(self.chosenList,parent=self)
             self.goToGame.show()
         else:
             option = QMessageBox.question(self, "Warning.", "You must select 12 categories to play.", QMessageBox.Ok)
