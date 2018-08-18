@@ -26,8 +26,8 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
 
     def getCategories(self, categoriesSelected):
         categories = []
-        for cat in categoriesSelected:
-            category = self.__getCategory(cat)
+        for cat in range(categoriesSelected.count()-1):
+            category = self.__getCategory(categoriesSelected.item(cat).text())
             categories.append(category)
 
         return categories
