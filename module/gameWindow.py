@@ -3,8 +3,6 @@ from ui.game import Ui_game
 from classes.Game import Game
 from module.gameChoiceWindow import GameChoiceWindow
 from module.gameAnswerWindow import GameAnswerWindow
-from ui.gameChoice import Ui_gameChoice
-from ui.gameAnswer import Ui_gameAnswer
 from PyQt5.QtWidgets import QMessageBox
 import os
 import csv
@@ -26,8 +24,8 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
 
     def getCategories(self, categoriesSelected):
         categories = []
-        for cat in range(categoriesSelected.count()-1):
-            category = self.__getCategory(categoriesSelected.item(cat).text())
+        for cat in categoriesSelected:
+            category = self.__getCategory(cat)
             categories.append(category)
 
         return categories
@@ -54,8 +52,8 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
         # Opens the Game Choice but needs to get the selected category
         if self.spin == 7 or self.spin == 9:
             self.goToGameChoice = GameChoiceWindow(self.game, parent=self)
-            self.goToGameChoice.show()
-            self.spin = 1 #LOSE A TURN FOR NOW
+            self.goToGameChoice.exec()
+            self.spin = self.goToGameChoice.categoryChoice
 
         # Once it has a category or if the category is spun, brings up the Game Answer window.  Should determine if
         # player answered correctly and adject accordingly.
@@ -68,3 +66,6 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
             self.game.playTurn(self.spin)
 
         self.updateUI()
+
+    def setSpin(self, spin):
+        self.spin = spin
