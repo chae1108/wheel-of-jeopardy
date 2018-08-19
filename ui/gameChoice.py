@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QAbstractItemView
+from PyQt5.QtWidgets import QMessageBox
 from classes.Game import Game
 
 class Ui_gameChoice(object):
@@ -17,7 +18,6 @@ class Ui_gameChoice(object):
         self.list.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         categories = self.getCategoryNames()
-
         for category in categories:
             item = QtWidgets.QListWidgetItem(category)
             self.list.addItem(item.text())
@@ -34,8 +34,10 @@ class Ui_gameChoice(object):
         categoryNames = []
 
         for category in self.game.getBoard().getCategories():
-            name = category.getName()
-            categoryNames.append(name)
+            available = category.isAvailable()
+            if available:
+                name = category.getName()
+                categoryNames.append(name)
 
         return categoryNames
 

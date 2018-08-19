@@ -33,3 +33,4 @@ class Ui_categoryMenu(object):
         self.back.setText(_translate("categoryMenu", "Back"))
         self.categoryDelete.setText(_translate("categoryMenu", "Delete Category"))
         self.categoryAdd.setText(_translate("categoryMenu", "Add Category"))
+
