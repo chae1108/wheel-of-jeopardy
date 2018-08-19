@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QAbstractItemView
 from classes.Game import Game
 
 class Ui_gameChoice(object):
+
     def setupUi(self, gameChoice, game):
         self.game = game
         gameChoice.setObjectName("gameChoice")
@@ -24,8 +25,6 @@ class Ui_gameChoice(object):
         self.retranslateUi(gameChoice)
         QtCore.QMetaObject.connectSlotsByName(gameChoice)
 
-        self.categoryChoice = -1
-
     def retranslateUi(self, gameChoice):
         _translate = QtCore.QCoreApplication.translate
         gameChoice.setWindowTitle(_translate("gameChoice", "Choose a Category"))
@@ -43,6 +42,7 @@ class Ui_gameChoice(object):
     def selectCategory(self):
         try:
             spin = self.list.currentRow()
+            return spin
         except:
             message = QMessageBox.question(self, "Error",
                                            "Please select a category.",

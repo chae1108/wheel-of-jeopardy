@@ -1,12 +1,13 @@
 from PyQt5 import QtGui, QtWidgets, QtCore
 from ui.gameChoice import Ui_gameChoice
-from module.gameAnswerWindow import GameAnswerWindow
 from classes.Game import Game
 from functools import partial
 from PyQt5.QtWidgets import QMessageBox
 
-class GameChoiceWindow(QtWidgets.QMainWindow, Ui_gameChoice):
+class GameChoiceWindow(QtWidgets.QDialog, Ui_gameChoice):
+
     def __init__(self, game, parent):
+        modal = True
         super(GameChoiceWindow, self).__init__(parent)
         self.setupUi(self, game)
         self.select.clicked.connect(partial(self.selectToPlay,parent))
