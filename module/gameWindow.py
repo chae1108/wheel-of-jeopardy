@@ -52,12 +52,7 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
         # Opens the Game Choice but needs to get the selected category
         if self.spin == 7 or self.spin == 9:
             self.goToGameChoice = GameChoiceWindow(self.game, parent=self)
-<<<<<<< HEAD
             self.goToGameChoice.show()
-=======
-            self.goToGameChoice.exec_()
-            self.spin = self.goToGameChoice.categoryChoice
->>>>>>> 125a758eadd3729bc04ffb2fecd2a6b5fa73d16d
 
         # Once it has a category or if the category is spun, brings up the Game Answer window.  Should determine if
         # player answered correctly and adject accordingly.
@@ -72,7 +67,6 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
         else:
             self.game.playTurn(self.spin)
 
-<<<<<<< HEAD
 
         if (self.game.getSpins() == 45):
             message = QMessageBox.information(self,"End of Round", "The Round has ended.")
@@ -83,9 +77,3 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
             #self.game.getPlayer(2).addRoundScoreToTotal()
 
         self.updateUI()
-=======
-        self.updateUI()
-
-    def setSpin(self, spin):
-        self.spin = spin
->>>>>>> 125a758eadd3729bc04ffb2fecd2a6b5fa73d16d
