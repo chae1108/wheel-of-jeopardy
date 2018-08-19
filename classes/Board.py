@@ -37,12 +37,7 @@ class Board:
     def playCategory(self, id):
         categorySelected = self.__categories[id]
         square = categorySelected.getAvailableSquare()
-        categorySelected.popSquare()
         return square
-
-    def lenCategory(self, id):
-        categorySelected = self.__categories[id]
-        return categorySelected.lenSquare()
 
     # Prints the board
     def printBoard(self):
