@@ -1,10 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
 from ui.game import Ui_game
 from classes.Game import Game
 from module.gameChoiceWindow import GameChoiceWindow
 from module.gameAnswerWindow import GameAnswerWindow
-from ui.gameChoice import Ui_gameChoice
-from ui.gameAnswer import Ui_gameAnswer
+from module.gameOverWindow import GameOverWindow
 from PyQt5.QtWidgets import QMessageBox
 import os
 import csv
@@ -26,8 +26,8 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
 
     def getCategories(self, categoriesSelected):
         categories = []
-        for cat in range(categoriesSelected.count()-1):
-            category = self.__getCategory(categoriesSelected.item(cat).text())
+        for cat in categoriesSelected:
+            category = self.__getCategory(cat)
             categories.append(category)
 
         return categories
@@ -54,28 +54,32 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
         # Opens the Game Choice but needs to get the selected category
         if self.spin == 7 or self.spin == 9:
             self.goToGameChoice = GameChoiceWindow(self.game, parent=self)
-            self.goToGameChoice.show()
+            self.goToGameChoice.exec_()
+            self.spin = self.goToGameChoice.categoryChoice
 
         # Once it has a category or if the category is spun, brings up the Game Answer window.  Should determine if
         # player answered correctly and adject accordingly.
-        elif self.spin == 0 or self.spin == 2 or self.spin == 4 or self.spin == 6 or self.spin == 8 or self.spin == 10:
+        if self.spin == 0 or self.spin == 2 or self.spin == 4 or self.spin == 6 or self.spin == 8 or self.spin == 10:
             data = self.game.playCategory(self.spin)
             if not(data[0] == ""):
                 self.goToGameAnswer = GameAnswerWindow(data, parent=self)
-                self.goToGameAnswer.show()
-                self.game.playTurn(self.spin)
-            else:
-                message = QMessageBox.information(self,"Spin Again", "Spin Again. All questions in this category has been answered.")
+                self.goToGameAnswer.exec_()
+                answerCorrect = self.goToGameAnswer.answerCorrect
+
+                questionValue = data[1]
+                if answerCorrect:
+                    self.game.playerAnswersCorrect(questionValue)
+                else:
+                    self.game.playerAnswersIncorrect(questionValue)
         else:
             self.game.playTurn(self.spin)
 
-
-        if (self.game.getSpins() == 0):
-            message = QMessageBox.information(self,"End of Round", "The Round has ended.")
-            self.categories[0:5]=self.categories[6:11]
-            self.game.nextRound(self.categories[0:5])
-            #self.game.getPlayer(0).addRoundScoreToTotal()
-            #self.game.getPlayer(1).addRoundScoreToTotal()
-            #self.game.getPlayer(2).addRoundScoreToTotal()
+        gameOver = self.game.isGameOver()
+        if gameOver:
+            self.updateUI()
+            winner = self.game.getWinner()
+            score = self.game.getPlayer(winner).getTotalScore()
+            goToGaveOver = GameOverWindow(winner, score, parent=self)
+            goToGaveOver.exec_()
 
         self.updateUI()
