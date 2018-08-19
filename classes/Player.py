@@ -22,9 +22,9 @@ class Player:
     def updateRoundScore(self, update):
         self.__roundScore += update
 
-    # Updates the player's total score
-    def updateTotalScore(self, update):
-        self.__totalScore += update
+    # Resets the player's round score
+    def resetRoundScore(self):
+        self.__roundScore = 0
 
     # Doubles the player's round score
     def doubleScore(self):
