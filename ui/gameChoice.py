@@ -34,10 +34,8 @@ class Ui_gameChoice(object):
         categoryNames = []
 
         for category in self.game.getBoard().getCategories():
-            available = category.isAvailable()
-            if available:
-                name = category.getName()
-                categoryNames.append(name)
+            name = category.getName()
+            categoryNames.append(name)
 
         return categoryNames
 

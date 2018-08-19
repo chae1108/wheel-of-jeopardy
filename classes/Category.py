@@ -41,6 +41,13 @@ class Category:
                     self.__setUnavailable()
                 return square
 
+    def popSquare(self):
+        self.__squares.pop(0)
+
+    def lenSquare(self):
+        return len(self.__squares)
+
+
     # Returns a square with the specific ID
     def getSquare(self, id):
         return self.__squares[id]

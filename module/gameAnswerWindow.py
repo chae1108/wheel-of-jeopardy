@@ -9,19 +9,21 @@ class GameAnswerWindow(QtWidgets.QMainWindow, Ui_gameAnswer):
         print(parent.__class__)
         self.setupUi(self, data)
         self.showAnswer.clicked.connect(self.goToAnswer)
-        self.right.clicked.connect(self.rightAnswer)
-        self.wrong.clicked.connect(self.wrongAnswer)
         turn = parent.game.getTurn()
+        self.right.clicked.connect(partial(self.rightAnswer,parent))
         self.right.clicked.connect(partial(parent.game.getPlayer(turn).updateRoundScore,self.data[1]))
         self.right.clicked.connect(parent.updateUI)
+        self.wrong.clicked.connect(partial(self.wrongAnswer,parent))
         self.wrong.clicked.connect(parent.updateUI)
         _translate = QtCore.QCoreApplication.translate
 
     def goToAnswer(self):
         self.updateUI()
 
-    def rightAnswer(self):
+    def rightAnswer(self,parent):
         self.close()
+        parent.game.nextTurn()
 
-    def wrongAnswer(self):
+    def wrongAnswer(self,parent):
         self.close()
+        parent.game.nextTurn()
