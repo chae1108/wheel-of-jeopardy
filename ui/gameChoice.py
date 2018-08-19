@@ -38,6 +38,8 @@ class Ui_gameChoice(object):
             if available:
                 name = category.getName()
                 categoryNames.append(name)
+            else:
+                categoryNames.append("<No question left>")
 
         return categoryNames
 
