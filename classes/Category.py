@@ -37,16 +37,13 @@ class Category:
     def getAvailableSquare(self):
         for square in self.__squares:
             if square.isAnswered() == False:
+                square.setAnswered()
                 if square.getID() == (len(self.__squares) - 1):
                     self.__setUnavailable()
                 return square
 
-    def popSquare(self):
-        self.__squares.pop(0)
-
-    def lenSquare(self):
-        return len(self.__squares)
-
+    def getSquares(self):
+        return self.__squares
 
     # Returns a square with the specific ID
     def getSquare(self, id):
