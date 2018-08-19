@@ -74,11 +74,12 @@ class Ui_game(object):
         self.spinner.setGeometry(QtCore.QRect(180, 375, 112, 34))
         self.spinner.setObjectName("spinner")
         self.sector = QtWidgets.QLabel(game)
-        self.sector.setGeometry(QtCore.QRect(200, 150, 121, 51))
+        self.sector.setGeometry(QtCore.QRect(200, 150, 181, 100))
         self.sector.setObjectName("sector")
+        self.sector.setWordWrap(True)
 
         self.gridLayoutWidget = QtWidgets.QWidget(game)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(500, 160, 600, 500))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(530, 160, 580, 470))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -271,7 +272,7 @@ class Ui_game(object):
     def updateUI(self):
         _translate = QtCore.QCoreApplication.translate
         categoryname = ["Category 1","Lose Turn","Category 2","Free Turn","Category 3",
-        "Bankrupt","Category 4","Game Choice 1","Category 5","Game Choice 2","Category 6",
+        "Bankrupt","Category 4","Player's Choice","Category 5","Opponent's Choice","Category 6",
         "Double Score"]
         self.round.setText(_translate("game", "Round: " + str(self.game.getRound())))
         self.spins.setText(_translate("game", "Spins: " + str(self.game.getSpins())))
@@ -291,41 +292,41 @@ class Ui_game(object):
     # INCOMPLETE -- Should change the score displayed based on the round.  Should also display a BLANK square once the
     # question is answered
     def updateCategories(self, _translate):
-        self.c1q1.setText(_translate("game", str(self.game.getSpins())))
-        self.c1q2.setText(_translate("game", "$400"))
-        self.c1q3.setText(_translate("game", "$600"))
-        self.c1q4.setText(_translate("game", "$800"))
-        self.c1q5.setText(_translate("game", "$1,000"))
+        self.c1q1.setText(_translate("game", "$200" if self.game.getBoard().lenCategory(0)==5 else ""))
+        self.c1q2.setText(_translate("game", "$400" if self.game.getBoard().lenCategory(0)>=4 else ""))
+        self.c1q3.setText(_translate("game", "$600" if self.game.getBoard().lenCategory(0)>=3 else ""))
+        self.c1q4.setText(_translate("game", "$800" if self.game.getBoard().lenCategory(0)>=2 else ""))
+        self.c1q5.setText(_translate("game", "$1,000" if self.game.getBoard().lenCategory(0)>=1 else ""))
 
-        self.c2q1.setText(_translate("game", "$200"))
-        self.c2q2.setText(_translate("game", "$400"))
-        self.c2q3.setText(_translate("game", "$600"))
-        self.c2q4.setText(_translate("game", "$800"))
-        self.c2q5.setText(_translate("game", "$1,000"))
+        self.c2q1.setText(_translate("game", "$200"  if self.game.getBoard().lenCategory(1)==5 else ""))
+        self.c2q2.setText(_translate("game", "$400" if self.game.getBoard().lenCategory(1)>=4 else ""))
+        self.c2q3.setText(_translate("game", "$600" if self.game.getBoard().lenCategory(1)>=3 else ""))
+        self.c2q4.setText(_translate("game", "$800" if self.game.getBoard().lenCategory(1)>=2 else ""))
+        self.c2q5.setText(_translate("game", "$1,000" if self.game.getBoard().lenCategory(1)>=1 else ""))
 
-        self.c3q1.setText(_translate("game", "$200"))
-        self.c3q2.setText(_translate("game", "$400"))
-        self.c3q3.setText(_translate("game", "$600"))
-        self.c3q4.setText(_translate("game", "$800"))
-        self.c3q5.setText(_translate("game", "$1,000"))
+        self.c3q1.setText(_translate("game", "$200"  if self.game.getBoard().lenCategory(2)==5 else ""))
+        self.c3q2.setText(_translate("game", "$400" if self.game.getBoard().lenCategory(2)>=4 else ""))
+        self.c3q3.setText(_translate("game", "$600" if self.game.getBoard().lenCategory(2)>=3 else ""))
+        self.c3q4.setText(_translate("game", "$800" if self.game.getBoard().lenCategory(2)>=2 else ""))
+        self.c3q5.setText(_translate("game", "$1,000" if self.game.getBoard().lenCategory(2)>=1 else ""))
 
-        self.c4q1.setText(_translate("game", "$200"))
-        self.c4q2.setText(_translate("game", "$400"))
-        self.c4q3.setText(_translate("game", "$600"))
-        self.c4q4.setText(_translate("game", "$800"))
-        self.c4q5.setText(_translate("game", "$1,000"))
+        self.c4q1.setText(_translate("game", "$200"  if self.game.getBoard().lenCategory(3)==5 else ""))
+        self.c4q2.setText(_translate("game", "$400" if self.game.getBoard().lenCategory(3)>=4 else ""))
+        self.c4q3.setText(_translate("game", "$600" if self.game.getBoard().lenCategory(3)>=3 else ""))
+        self.c4q4.setText(_translate("game", "$800" if self.game.getBoard().lenCategory(3)>=2 else ""))
+        self.c4q5.setText(_translate("game", "$1,000" if self.game.getBoard().lenCategory(3)>=1 else ""))
 
-        self.c5q1.setText(_translate("game", "$200"))
-        self.c5q2.setText(_translate("game", "$400"))
-        self.c5q3.setText(_translate("game", "$600"))
-        self.c5q4.setText(_translate("game", "$800"))
-        self.c5q5.setText(_translate("game", "$1,000"))
+        self.c5q1.setText(_translate("game", "$200"  if self.game.getBoard().lenCategory(4)==5 else ""))
+        self.c5q2.setText(_translate("game", "$400" if self.game.getBoard().lenCategory(4)>=4 else ""))
+        self.c5q3.setText(_translate("game", "$600" if self.game.getBoard().lenCategory(4)>=3 else ""))
+        self.c5q4.setText(_translate("game", "$800" if self.game.getBoard().lenCategory(4)>=2 else ""))
+        self.c5q5.setText(_translate("game", "$1,000" if self.game.getBoard().lenCategory(4)>=1 else ""))
 
-        self.c6q1.setText(_translate("game", "$200"))
-        self.c6q2.setText(_translate("game", "$400"))
-        self.c6q3.setText(_translate("game", "$600"))
-        self.c6q4.setText(_translate("game", "$800"))
-        self.c6q5.setText(_translate("game", "$1,000"))
+        self.c6q1.setText(_translate("game", "$200"  if self.game.getBoard().lenCategory(5)==5 else ""))
+        self.c6q2.setText(_translate("game", "$400" if self.game.getBoard().lenCategory(5)>=4 else ""))
+        self.c6q3.setText(_translate("game", "$600" if self.game.getBoard().lenCategory(5)>=3 else ""))
+        self.c6q4.setText(_translate("game", "$800" if self.game.getBoard().lenCategory(5)>=2 else ""))
+        self.c6q5.setText(_translate("game", "$1,000" if self.game.getBoard().lenCategory(5)>=1 else ""))
 
     # Paints a rectangle indicating which player's turn it is
     def paintEvent(self, e):

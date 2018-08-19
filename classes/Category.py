@@ -22,7 +22,6 @@ class Category:
                 squares.append(square)
                 id += 1
                 value += 200
-                print(square)
 
             return squares
 
@@ -36,13 +35,18 @@ class Category:
 
     # Returns the next available square in the category.  If the square is the final entry, it sets the category as unavailable.
     def getAvailableSquare(self):
-        print("XXXX")
         for square in self.__squares:
-            print(square)
             if square.isAnswered() == False:
                 if square.getID() == (len(self.__squares) - 1):
                     self.__setUnavailable()
                 return square
+
+    def popSquare(self):
+        self.__squares.pop(0)
+
+    def lenSquare(self):
+        return len(self.__squares)
+
 
     # Returns a square with the specific ID
     def getSquare(self, id):

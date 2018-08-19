@@ -95,7 +95,6 @@ class Game:
             print("Free turns avaialable")
         else:
             self.nextTurn()
-            print("Lose Turn")
 
     def __freeTurn(self, player):
         player.addFreeTurn()
@@ -113,7 +112,7 @@ class Game:
     def playCategory(self, spin):
         boardID = int(spin / 2)
         categoryIsAvailable = self.__board.isCategoryAvailable(boardID)
-        if categoryIsAvailable:
+        if self.getBoard().lenCategory(int(spin / 2))>=1:
             catName = self.getBoard().getCategory(boardID).getName()
             square = self.__board.playCategory(boardID)
             question = square.getQuestion()
@@ -127,10 +126,10 @@ class Game:
         self.useSpin()
 
     def playerAnswersCorrect(self):
-        return
+        return True
 
     def playerAnswersIncorrect(self):
-        return
+        return False
 
     def useSpin(self):
         self.__spins -= 1
@@ -143,7 +142,7 @@ class Game:
         self.__round += 1
         self.__spins = 50
         self.__wheel = self.__createWheel(categories)
-        self.__board = self.__board(categories, self.__round)
+        self.__board = self.__createBoard(categories, self.__round)
 
     def __getLastPlacePlayer(self):
         lowestScore = self.__players[0].getTotalScore()

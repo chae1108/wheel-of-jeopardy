@@ -3,6 +3,7 @@ from ui.gameChoice import Ui_gameChoice
 from module.gameAnswerWindow import GameAnswerWindow
 from classes.Game import Game
 from functools import partial
+from PyQt5.QtWidgets import QMessageBox
 
 class GameChoiceWindow(QtWidgets.QMainWindow, Ui_gameChoice):
     def __init__(self, game, parent):
@@ -14,9 +15,10 @@ class GameChoiceWindow(QtWidgets.QMainWindow, Ui_gameChoice):
 
     def selectToPlay(self,parent):
         self.close()
-        print(self.list.currentRow())
         data = self.game.playCategory(self.list.currentRow()*2)
-        print(data)
         if not(data[0] == ""):
             self.goToGameAnswer = GameAnswerWindow(data, parent=parent)
             self.goToGameAnswer.show()
+            parent.game.playTurn(parent.spin)  
+        else:
+            message = QMessageBox.information(parent,"Spin Again", "Spin Again. All questions in this category has been answered.")
