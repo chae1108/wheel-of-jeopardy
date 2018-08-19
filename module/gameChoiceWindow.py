@@ -3,6 +3,7 @@ from ui.gameChoice import Ui_gameChoice
 from classes.Game import Game
 from functools import partial
 from PyQt5.QtWidgets import QMessageBox
+from module.gameAnswerWindow import GameAnswerWindow
 
 class GameChoiceWindow(QtWidgets.QDialog, Ui_gameChoice):
 

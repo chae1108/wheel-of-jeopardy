@@ -3,6 +3,8 @@ from ui.game import Ui_game
 from classes.Game import Game
 from module.gameChoiceWindow import GameChoiceWindow
 from module.gameAnswerWindow import GameAnswerWindow
+from ui.gameChoice import Ui_gameChoice
+from ui.gameAnswer import Ui_gameAnswer
 from PyQt5.QtWidgets import QMessageBox
 import os
 import csv
@@ -24,8 +26,8 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
 
     def getCategories(self, categoriesSelected):
         categories = []
-        for cat in categoriesSelected:
-            category = self.__getCategory(cat)
+        for cat in range(categoriesSelected.count()-1):
+            category = self.__getCategory(categoriesSelected.item(cat).text())
             categories.append(category)
 
         return categories
@@ -68,7 +70,7 @@ class GameWindow(QtWidgets.QMainWindow, Ui_game):
             self.game.playTurn(self.spin)
 
 
-        if (self.game.getSpins() == 45):
+        if (self.game.getSpins() == 0):
             message = QMessageBox.information(self,"End of Round", "The Round has ended.")
             self.categories[0:5]=self.categories[6:11]
             self.game.nextRound(self.categories[0:5])
