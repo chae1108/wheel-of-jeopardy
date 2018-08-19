@@ -21,8 +21,8 @@ class Ui_gameAnswer(object):
         self.question = QtWidgets.QLabel(gameAnswer)
         self.question.setAlignment(Qt.AlignCenter)
         self.question.setGeometry(QtCore.QRect(0, 80, 750, 120))
+        self.question.setFont(font)
         self.question.setObjectName("question")
-        self.question.setWordWrap(True)
         self.answer = QtWidgets.QLabel(gameAnswer)
         self.answer.setAlignment(Qt.AlignCenter)
         self.answer.setGeometry(QtCore.QRect(300, 190, 180, 60))
@@ -52,5 +52,5 @@ class Ui_gameAnswer(object):
         self.wrong.setText(_translate("gameAnswer", "Wrong"))
 
     def updateUI(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.answer.setText(_translate("gameAnswer", self.data[3]))
+        self.answer.setText(self.data[3])
+        self.repaint()
